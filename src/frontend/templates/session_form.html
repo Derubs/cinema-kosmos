@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Добавление сеанса{% endblock %}
+{% block content %}
+<h1>Добавление сеанса</h1>
+<form class="form-card" method="POST" action="{{ url_for('admin_session_add') }}">
+    <label>Фильм
+        <select name="film_id" required>
+            <option value="" disabled selected>— выберите фильм —</option>
+            {% for f in films %}
+                <option value="{{ f[0] }}">{{ f[1] }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Дата и время (ГГГГ-ММ-ДД ЧЧ:ММ)
+        <input type="text" name="start_time" required placeholder="2026-12-05 18:30"
+               pattern="\d{4}-\d{2}-\d{2} \d{2}:\d{2}">
+    </label>
+    <label>Зал
+        <select name="hall" required>
+            <option value="Зал 1">Зал 1</option>
+            <option value="Зал 2">Зал 2</option>
+        </select>
+    </label>
+    <label>Цена билета, ₽
+        <input type="number" name="price" required min="1" step="10" value="300">
+    </label>
+    <button type="submit" class="btn">Сохранить</button>
+    <a class="btn btn-outline" href="{{ url_for('admin_sessions') }}">Отмена</a>
+</form>
+{% endblock %}

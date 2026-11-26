@@ -1,0 +1,23 @@
+# Виртуальное окружение Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Кэш IDE
+.idea/
+.vscode/
+
+# Логи (в репозитории лежит демонстрационный app.log из ЛР 20)
+# *.log
+
+# Временные файлы автотестов
+tests/.tmp/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Временные файлы
+*.tmp
+.DS_Store

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Афиша — Онлайн-кинотеатр «Космос»{% endblock %}
+{% block content %}
+<h1>Афиша кинотеатра «Космос»</h1>
+<p class="subtitle">Выберите фильм, а затем сеанс — и забронируйте место онлайн.</p>
+
+{% for item in items %}
+    <section class="film-card">
+        <div class="film-info">
+            <h2>{{ item.film[1] }}</h2>
+            <p class="film-meta">
+                <span class="tag">{{ item.film[2] }}</span>
+                <span class="tag">{{ item.film[3] }} мин</span>
+                <span class="tag">{{ item.film[4] }}</span>
+            </p>
+            <p class="film-desc">{{ item.film[5] }}</p>
+        </div>
+        <div class="film-sessions">
+            <h3>Сеансы:</h3>
+            {% if item.sessions %}
+                <table class="sessions-table">
+                    <tr><th>Время</th><th>Зал</th><th>Цена</th><th></th></tr>
+                    {% for s in item.sessions %}
+                        <tr>
+                            <td>{{ s[1] }}</td>
+                            <td>{{ s[2] }}</td>
+                            <td>{{ '%.0f'|format(s[3]) }} ₽</td>
+                            <td><a class="btn btn-small" href="{{ url_for('session_page', session_id=s[0]) }}">Купить билет</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>Сеансов пока нет.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endfor %}
+{% endblock %}

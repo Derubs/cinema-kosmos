@@ -1,0 +1,11 @@
+{
+  "created": "эталон",
+  "hashes": {
+    "src/backend/app.py": "bf758602c194c21c45796728a17e57ece999507bde00243dfd20995e9edf5adb",
+    "src/backend/db.py": "950a4bc52fc9c6296f30a2d93c3433a3a891544aa3f9ecdf5e5162415f6fe145",
+    "src/db/schema.sql": "ff83bfb48f1d4e5a494be4f589c6ae194278b6928392d081e3b626a469c45c37",
+    "src/db/seed.sql": "0d511683f42f3f083ec4b4dbf1bcac2d88e6054cc1fa286fe81a54c1ada025c0",
+    "README.md": "8e9c0e06b1307623aec9ebe8528d1cd27544330d244c7fe77fe262710dd49125",
+    "run.py": "bfa9f9a2128a5e07b05f354c034dfe0c897c58b7f00473c11d29a148ef03121f"
+  }
+}

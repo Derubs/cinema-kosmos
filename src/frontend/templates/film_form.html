@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Редактирование фильма' if film else 'Добавление фильма' }}{% endblock %}
+{% block content %}
+<h1>{{ 'Редактирование фильма' if film else 'Добавление фильма' }}</h1>
+<form class="form-card" method="POST"
+      action="{{ url_for('admin_film_edit', film_id=film[0]) if film else url_for('admin_film_add') }}">
+    <label>Название
+        <input type="text" name="title" required value="{{ film[1] if film else '' }}">
+    </label>
+    <label>Жанр
+        <input type="text" name="genre" required value="{{ film[2] if film else '' }}">
+    </label>
+    <label>Длительность, мин
+        <input type="number" name="duration" required min="1" max="300"
+               value="{{ film[3] if film else '' }}">
+    </label>
+    <label>Возрастной рейтинг
+        <select name="age_rating" required>
+            {% for age in ['0+', '6+', '12+', '16+', '18+'] %}
+                <option value="{{ age }}" {{ 'selected' if film and film[4] == age }}>{{ age }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Описание
+        <textarea name="description" rows="3">{{ film[5] if film else '' }}</textarea>
+    </label>
+    <button type="submit" class="btn">Сохранить</button>
+    <a class="btn btn-outline" href="{{ url_for('admin_films') }}">Отмена</a>
+</form>
+{% endblock %}
