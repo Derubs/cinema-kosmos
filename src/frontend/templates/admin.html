@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Админ-панель{% endblock %}
+{% block content %}
+<h1>Админ-панель</h1>
+<p class="subtitle">Управление репертуаром кинотеатра «Космос».</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-num">{{ stats.films }}</div>
+        <div class="stat-label">фильмов в афише</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">{{ stats.sessions }}</div>
+        <div class="stat-label">сеансов в расписании</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">{{ stats.tickets }}</div>
+        <div class="stat-label">действующих билетов</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">{{ '%.0f'|format(stats.revenue) }} ₽</div>
+        <div class="stat-label">выручка по действующим билетам</div>
+    </div>
+</div>
+
+<div class="admin-menu">
+    <a class="btn" href="{{ url_for('admin_films') }}">Афиша (фильмы)</a>
+    <a class="btn" href="{{ url_for('admin_sessions') }}">Расписание (сеансы)</a>
+    <a class="btn" href="{{ url_for('admin_tickets') }}">Отчёт о продажах</a>
+</div>
+{% endblock %}

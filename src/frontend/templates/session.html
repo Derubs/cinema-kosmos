@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Выбор места — {{ s[4] }}{% endblock %}
+{% block content %}
+<h1>Выбор места</h1>
+<div class="session-head">
+    <h2>{{ s[4] }}</h2>
+    <p class="film-meta">
+        <span class="tag">{{ s[1] }}</span>
+        <span class="tag">{{ s[2] }}</span>
+        <span class="tag">{{ '%.0f'|format(s[3]) }} ₽</span>
+        <span class="tag">{{ s[7] }}</span>
+    </p>
+</div>
+
+<div class="screen">Экран</div>
+
+<form method="POST" action="{{ url_for('book') }}" id="seat-form">
+    <input type="hidden" name="session_id" value="{{ s[0] }}">
+    <div class="hall">
+        {% for row in hall %}
+            <div class="hall-row">
+                <span class="row-label">Ряд {{ row.num }}</span>
+                {% for seat in row.seats %}
+                    <button type="submit"
+                            name="row_seat"
+                            value="{{ row.num }}:{{ seat.num }}"
+                            class="seat {{ 'taken' if seat.taken }}"
+                            {% if seat.taken %}disabled
+                               title="Место занято"{% else %}
+                               title="Ряд {{ row.num }}, место {{ seat.num }}"{% endif %}>
+                        {{ seat.num }}
+                    </button>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</form>
+
+<div class="legend">
+    <span class="seat legend-free">5</span> свободно
+    <span class="seat taken legend">5</span> занято
+</div>
+{% if session.get('user_id') %}
+    <p class="hint">Нажмите на свободное место, чтобы забронировать его.</p>
+{% else %}
+    <p class="warn">Для бронирования нужно войти в систему: <a href="{{ url_for('login', next=request.path) }}">Вход</a></p>
+{% endif %}
+{% endblock %}

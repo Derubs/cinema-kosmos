@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Афиша — админ-панель{% endblock %}
+{% block content %}
+<h1>Афиша (фильмы)</h1>
+<p><a class="btn" href="{{ url_for('admin_film_add') }}">+ Добавить фильм</a></p>
+<table class="data-table">
+    <tr><th>ID</th><th>Название</th><th>Жанр</th><th>Длит.</th><th>Возраст</th><th>Описание</th><th>Действия</th></tr>
+    {% for f in films %}
+        <tr>
+            <td>{{ f[0] }}</td>
+            <td>{{ f[1] }}</td>
+            <td>{{ f[2] }}</td>
+            <td>{{ f[3] }} мин</td>
+            <td>{{ f[4] }}</td>
+            <td class="wrap">{{ f[5] }}</td>
+            <td class="actions">
+                <a class="btn btn-small" href="{{ url_for('admin_film_edit', film_id=f[0]) }}">Изменить</a>
+                <form method="POST" action="{{ url_for('admin_film_delete', film_id=f[0]) }}"
+                      onsubmit="return confirm('Удалить фильм «{{ f[1] }}»?');">
+                    <button type="submit" class="btn btn-small btn-danger">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
