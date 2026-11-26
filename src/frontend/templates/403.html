@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Доступ запрещён{% endblock %}
+{% block content %}
+<div class="error-page">
+    <div class="error-code">403</div>
+    <h1>Доступ запрещён</h1>
+    <p>Эта страница доступна только администратору кинотеатра.
+    Если вы считаете, что это ошибка, обратитесь к персоналу.</p>
+    <a class="btn" href="{{ url_for('index') }}">На главную</a>
+</div>
+{% endblock %}

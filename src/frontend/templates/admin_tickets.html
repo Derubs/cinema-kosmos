@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Отчёт о продажах{% endblock %}
+{% block content %}
+<h1>Отчёт о продажах билетов</h1>
+<p class="subtitle">Действующих билетов: {{ stats.tickets }} · выручка: {{ '%.0f'|format(stats.revenue) }} ₽</p>
+{% if tickets %}
+    <table class="data-table">
+        <tr><th>№</th><th>Клиент</th><th>Фильм</th><th>Время</th><th>Зал</th><th>Ряд</th><th>Место</th><th>Цена</th><th>Статус</th><th></th></tr>
+        {% for t in tickets %}
+            <tr>
+                <td>{{ t[0] }}</td>
+                <td>{{ t[1] }}</td>
+                <td>{{ t[2] }}</td>
+                <td>{{ t[3] }}</td>
+                <td>{{ t[4] }}</td>
+                <td>{{ t[5] }}</td>
+                <td>{{ t[6] }}</td>
+                <td>{{ '%.0f'|format(t[7]) }} ₽</td>
+                <td>{{ 'действителен' if t[8] == 'booked' else 'отменён' }}</td>
+                <td>
+                    {% if t[8] == 'booked' %}
+                        <form method="POST" action="{{ url_for('cancel', ticket_id=t[0]) }}">
+                            <button type="submit" class="btn btn-small btn-danger">Отменить</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Билетов пока нет.</p>
+{% endif %}
+{% endblock %}

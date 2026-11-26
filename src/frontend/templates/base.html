@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Онлайн-кинотеатр «Космос»{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand" href="{{ url_for('index') }}">★ Космос</a>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Афиша</a>
+            {% if session.get('user_id') %}
+                <a href="{{ url_for('my_tickets') }}">Мои билеты</a>
+            {% endif %}
+            {% if session.get('role') == 'admin' %}
+                <a href="{{ url_for('admin_panel') }}">Админ-панель</a>
+            {% endif %}
+        </div>
+        <div class="nav-user">
+            {% if session.get('user_id') %}
+                <span class="user-name">{{ session.get('login') }} ({{ 'админ' if session.get('role') == 'admin' else 'клиент' }})</span>
+                <a class="btn btn-small" href="{{ url_for('logout') }}">Выйти</a>
+            {% else %}
+                <a class="btn btn-small" href="{{ url_for('login') }}">Вход</a>
+                <a class="btn btn-small btn-outline" href="{{ url_for('register') }}">Регистрация</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-area">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Онлайн-кинотеатр «Космос» · учебный проект УП 2026 · ИСиП-31 · Кирик Кирилл Романович</p>
+    </footer>
+</body>
+</html>
