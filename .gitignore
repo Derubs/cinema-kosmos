@@ -4,9 +4,10 @@ __pycache__/
 .venv/
 venv/
 
-# Кэш IDE
+# Кэш IDE (настройки проекта .vscode/settings.json хранятся в репозитории)
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 
 # Логи (в репозитории лежит демонстрационный app.log из ЛР 20)
 # *.log
