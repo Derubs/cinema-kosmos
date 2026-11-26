@@ -1,0 +1,13 @@
+# Единые переводы строк: в репозитории и в рабочей копии — LF.
+# Без этого Git конвертирует LF в CRLF на Windows, и хеши SHA-256
+# из ЛР 23 перестают совпадать с эталонными.
+* text=auto eol=lf
+
+# Двоичные файлы не трогаем
+*.png binary
+*.jpg binary
+*.pdf binary
+*.docx binary
+*.pptx binary
+*.db binary
+*.zip binary
